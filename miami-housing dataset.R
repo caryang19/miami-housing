@@ -1,8 +1,16 @@
+#set directory setwd()
+#get directory getwd()
+
+#install tidyverse
 install.packages('tidyverse')
 library('tidyverse')
+
+#import dataset--- make sure you move dataset inside project directory
 df <- read_csv("miami-housing.csv")
+
 #view dataset
 view(df)
+
 #view head
 head(df)
 colnames(df)
@@ -21,13 +29,16 @@ cleaned_df <- df
 colnames(cleaned_df)
 cleaned_df = cleaned_df %>% clean_names()
 colnames(cleaned_df)
+
 count(subset(df, avno60plus >=1))#check and count if there are values greater than 0
 count(subset(df, avno60plus < 1))#count values less than 1
 check_df <- subset(df, avno60plus >=1)
 view(check_df)
 
+#calculate standard deviation, mean, etc 
 summary(cleaned_df)
 
+#correlation
 cor(cleaned_df)
 install.packages("corrplot")
 install.packages("ggcorrplot")
@@ -45,6 +56,7 @@ location_df <- cleaned_df %>% select(longitude, latitude)
 view(location_df)
 cost_df <- cleaned_df %>% select(parcelno, sale_prc, tot_lvg_area, spec_feat_val, age, month_sold)
 view(cost_df)
+
 #using subset to select from sample subset
 valued_df <- subset(cost_df, sale_prc >= 250000 & age <= 20,select=sale_prc:month_sold)
 view(valued_df)
@@ -68,7 +80,7 @@ new_df <- cleaned_df %>% mutate(month_sold = month.abb[as.numeric(month_sold)])
 cleaned_df <- new_df
 view(cleaned_df)
 
-#Sorting the data for modeling
+#Sorting
 cleaned_df %>% arrange(sale_prc)
 #sort in ascending order
 view(cleaned_df %>% arrange(sale_prc))
@@ -77,7 +89,10 @@ view(cleaned_df %>% arrange(-sale_prc))
 
 #Deleting and removing 
 property_df$parcelno <- NULL
-property_df
+or
+remove_df <- subset(property_df, select = -parcelno)
+#removing multiple variblaes
+remove_df <- subset(property_df, select = -c(age,parcelno))
 #delete entire dataset
 rm(property_df)
 remove(property_df)
