@@ -1,0 +1,41 @@
+---
+title: "Miami-Housing Markdown"
+author: "Olamilekan Olumide"
+date: '2022-05-12'
+output: html_document
+---
+
+## Install Libraries
+
+install and activate "Tidyverse"
+
+```{#install tidyverse}
+install.packages('tidyverse')
+library('tidyverse')
+```
+
+## Import Dataset
+
+df \<- read_csv("miami-housing.csv")
+
+df \<- read.csv("miami-housing.csv")
+
+```{#import dataset--- make sure you move dataset inside project directory}
+df <- read_csv("miami-housing.csv")
+
+#view dataset
+view(df)
+```
+
+## View data head, column, first 6 and structure
+
+head, colnames, glipmse and str
+
+```{#view head}
+head(df)
+colnames(df)
+glimpse(df)
+str(df)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
